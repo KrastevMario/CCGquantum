@@ -40,7 +40,9 @@ class GameApp(App):
             self.message_label.text = 'Username cannot be empty.'
 
     def start_game(self, instance):
-        sio.emit('move', {'player': self.username_input.text, 'action': 'started the game'})
+        room = 'game_room_1'  # Example room assignment
+        sio.emit('join_room', {'room': room})
+        sio.emit('move', {'player': self.username_input.text, 'action': 'started the game', 'room': room})
         self.message_label.text = 'Game started!'
 
     def on_connect(self):
